@@ -9,7 +9,8 @@
 #include "gui.h"
 
 #define AMD_STRING "AuthenticAMD"
-#define ZEN_FAMILY 0x17
+#define ZEN_FAMILY1 0x17
+#define ZEN_FAMILY2 0x19
 
 // AMD PPR = https://www.amd.com/system/files/TechDocs/54945_PPR_Family_17h_Models_00h-0Fh.pdf
 
@@ -31,7 +32,7 @@ gboolean check_zen() {
     __get_cpuid(1, &eax, &ebx, &ecx, &edx);
 
     ext_family = ((eax >> 8) & 0xF) + ((eax >> 20) & 0xFF);
-    if (ext_family != ZEN_FAMILY){
+    if (ext_family != ZEN_FAMILY1 && ext_family != ZEN_FAMILY2){
         return FALSE;
     }
 
